@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.adp.avs.domain:cdm-json:1.1.2-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/adp/avs/domain/cdm-json/1.1.2-SNAPSHOT/cdm-json-1.1.2-20210121.093622-241.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/adp/avs/domain/cdm-json/1.1.2-SNAPSHOT/cdm-json-1.1.2-20210121.093622-241-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/adp/avs/domain/cdm-json/1.1.2-SNAPSHOT/cdm-json-1.1.2-20210121.093622-241-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
