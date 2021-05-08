@@ -14,7 +14,7 @@ import java.util.Properties;
 public class Utilities {
     static String url;
 
-    public String getUrl() {
+    public static String getUrl() {
 
 
 
@@ -35,7 +35,7 @@ public class Utilities {
     }
 
 
-    public static void screnshot(WebDriver driver, String name) {
+    public static void screenshot(WebDriver driver, String name) {
 
         TakesScreenshot ts = (TakesScreenshot) driver;
 

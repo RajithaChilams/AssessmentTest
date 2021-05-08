@@ -4,12 +4,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+/*
+    Author: RajithaMaru
+ */
 public class BrowserNavigation {
 
 
     static WebDriver driver;
 
-    public  WebDriver startBrowser(String browserName, String url) {
+    public WebDriver startBrowser(String browserName, String url) {
         if (browserName.equalsIgnoreCase("firefox")) {
 
             driver = new FirefoxDriver();
