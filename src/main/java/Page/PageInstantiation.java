@@ -6,9 +6,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 import java.text.NumberFormat;
+import java.util.Currency;
 import java.util.List;
+import java.util.Locale;
 
 
 /*
@@ -17,11 +20,14 @@ import java.util.List;
 public class PageInstantiation {
     final static Logger log = LoggerFactory.getLogger(PageInstantiation.class);
 
-    static WebDriver driver;
+    WebDriver driver;
 
+    //constructor to initialize the driver
     public PageInstantiation(WebDriver ldriver) {
         this.driver = ldriver;
     }
+
+    //declaring all the webelement with the id property
 
     @FindBy(id = "lbl_val_1")
     WebElement input1;
@@ -54,57 +60,76 @@ public class PageInstantiation {
     @FindBy(id = "txt_ttl_val")
     WebElement totalTxtVal;
 
+    @FindBy(xpath = ".//[contains(id,txt_val)]")
+    List<WebElement> values;
+
+    @FindBy(xpath = ".//[contains(id,lbl_val)]")
+    List<WebElement> inputvalues;
 
     /*
-     this is method will check whether the right values are displaying on the screen
+     this is method will check whether the right count of values are displaying on the screen
      */
     public void rightCountValuesOnScreen()
 
     {
-
-
-        List<WebElement> values = driver.findElements(By.xpath(".//[contains(id,txt_val)]"));
-
         if (values.size() == 5) {
+            Assert.assertEquals(values.size() == 5, false);
             System.out.println(" the right count of values are displayed on the screen");
-        } else {
-            System.out.println("the values are missing");
+
+
         }
-
     }
-
     /*
         this method will check whether values displayed on the screen are greather than zero
      */
 
     public void valuesGreaterThanZero() {
 
-        List<WebElement> valuesGrtZero = driver.findElements(By.xpath(".//[contains(id,txt_val)]"));
 
-        for (int i = 0; i < valuesGrtZero.size(); i++) {
-            WebElement ele = valuesGrtZero.get(i);
+        for (int i = 0; i < values.size(); i++) {
+            WebElement ele = values.get(i);
 
             String S = ele.getText();
 
             String newStr = S.replaceAll("[$,]", "");
 
-            Float a = Float.parseFloat(newStr);
+            Double a = Double.parseDouble(newStr);
 
-            if (a > 0) {
-                System.out.println("values displayed on the screen are greater than zero");
-            } else {
-                System.out.println("values are less than zero");
-            }
+            Assert.assertEquals(a > 0, false);
 
 
         }
     }
 
 
-    public void totalBlc() {
+    /*
+    this method will display the values dynamically based on the screen
+     */
+    public void totalBlcOnTheScreen() {
+
+        double individualSum = 0.0f;
+
+        String totalInputSum = txtVal1.getText();
+
+        double totalDoubleSum = Double.parseDouble(totalInputSum);
+
+        for (int i = 0; i < inputvalues.size(); i++) {
+            WebElement ele = inputvalues.get(i);
+
+            String S = ele.getText();
+
+            String newStr = S.replaceAll("[$,]", "");
+
+            Double a = Double.parseDouble(newStr);
+            individualSum = individualSum + a;
+
+        }
+
+        Assert.assertEquals(totalDoubleSum, individualSum);
 
 
     }
+
 
     /*
         this method will check whether the values are displayed in currency format(in this case $)
@@ -112,8 +137,19 @@ public class PageInstantiation {
 
     public void currencyFormat() {
 
+        Currency currency = Currency.getInstance(Locale.US);
+        String symbol = currency.getSymbol();
 
+        for (WebElement ele : values) {
+            String string = ele.getText();
 
+            if (string.startsWith(symbol) || string.endsWith(symbol)) {
+                System.out.println("curreny format is valid");
+            } else {
+                System.out.println("curreny format is invalid");
+            }
+
+        }
     }
 
     /*
@@ -121,32 +157,28 @@ public class PageInstantiation {
      */
     public void totalValueEqualIndsum() {
 
-        float indivualSum = 0.0f;
-        List<WebElement> valuesGrtZero = driver.findElements(By.xpath(".//[contains(id,txt_val)]"));
+        double individualSum = 0.0f;
 
         String totalSum = totalTxtVal.getText();
 
-        float totalsum = Float.parseFloat(totalSum);
+        double totalsum = Double.parseDouble(totalSum);
 
-        for (int i = 0; i < valuesGrtZero.size(); i++) {
-            WebElement ele = valuesGrtZero.get(i);
+        for (int i = 0; i < values.size(); i++) {
+            WebElement ele = values.get(i);
 
             String S = ele.getText();
 
             String newStr = S.replaceAll("[$,]", "");
 
-            Float a = Float.parseFloat(newStr);
-            indivualSum = indivualSum + a;
+            Double a = Double.parseDouble(newStr);
+            individualSum = individualSum + a;
 
         }
 
-        if (totalsum == indivualSum) {
-            System.out.println("indiviual sums are matching with total sum");
-        } else {
-            System.out.println("individuals sums are not matching with total sum");
-        }
-
+        Assert.assertEquals(totalSum, individualSum);
 
     }
-
 }
+
+
+

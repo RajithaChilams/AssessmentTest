@@ -11,11 +11,18 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+/*
+    Author: RajithaMaru
+ */
 public class Utilities {
     static String url;
 
-    public static String getUrl() {
+    /*
+    This method is to read the configuration file and get the url
 
+    */
+
+    public static String getUrl() {
 
 
         File f = new File("C:\\CucumberProjects\\privateRepo\\AssessmentTest\\config.properties");
@@ -35,6 +42,9 @@ public class Utilities {
     }
 
 
+    /*
+        this methods deals with screenshot functionality
+     */
     public static void screenshot(WebDriver driver, String name) {
 
         TakesScreenshot ts = (TakesScreenshot) driver;
@@ -42,7 +52,7 @@ public class Utilities {
         File src = ts.getScreenshotAs(OutputType.FILE);
 
         try {
-            FileUtils.copyFile(src, new File("C://maru//testresults//"+name+".png"));
+            FileUtils.copyFile(src, new File("C://maru//testresults//" + name + ".png"));
         } catch (IOException e) {
             e.printStackTrace();
 

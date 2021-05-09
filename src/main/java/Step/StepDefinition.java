@@ -26,6 +26,9 @@ import java.util.List;
 
 public class StepDefinition extends Utilities {
 
+    public Logger log = LoggerFactory.getLogger(StepDefinition.class);
+
+
     static WebDriver driver;
 
     PageInstantiation page = PageFactory.initElements(driver, PageInstantiation.class);
@@ -33,7 +36,6 @@ public class StepDefinition extends Utilities {
     BrowserNavigation browserNavigation = PageFactory.initElements(driver, BrowserNavigation.class);
 
     String url = Utilities.getUrl();
-
 
 
     @BeforeTest
@@ -63,25 +65,6 @@ public class StepDefinition extends Utilities {
     }
 
 
-
-    public Logger log = LoggerFactory.getLogger(StepDefinition.class);
-
-
-
-    @When("^user enters the below values$")
-    public void user_enters_the_below_values(DataTable values) throws Throwable {
-
-       /* List<List<Double>> data = values.raw();
-
-        float value1= (Float)data.get(1).get(1);
-        float value2= data.get(2).get(1);
-        float value3= data.get(3).get(1);
-        float value4= data.get(4).get(1);
-        float value5= data.get(5).get(1);*/
-
-
-    }
-
     @Then("^the right count of values should appear on the screen$")
     public void the_right_count_of_values_should_appear_on_the_screen() throws Throwable {
 
@@ -98,11 +81,14 @@ public class StepDefinition extends Utilities {
 
     @Then("^the total balance should be correct$")
     public void the_total_balance_should_be_correct() throws Throwable {
+        page.totalBlcOnTheScreen();
 
     }
 
     @Then("^values should be formatted as currency$")
     public void values_should_be_formatted_as_currency() throws Throwable {
+
+        page.currencyFormat();
 
     }
 

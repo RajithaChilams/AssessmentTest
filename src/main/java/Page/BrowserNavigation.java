@@ -10,7 +10,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class BrowserNavigation {
 
 
-    static WebDriver driver;
+     WebDriver driver;
 
     public WebDriver startBrowser(String browserName, String url) {
         if (browserName.equalsIgnoreCase("firefox")) {
